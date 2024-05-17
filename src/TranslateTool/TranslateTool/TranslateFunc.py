@@ -24,7 +24,7 @@ import json
 import requests   # pip intasll requests
 from Py4Js import *
 from Logger import *
-
+from translate import *
 
 # 百度翻译方法
 def baidu_translate(content,type=1):
@@ -187,12 +187,20 @@ def google_translate(content):
     else:
         return (False,ret)
 
+def translate_local(content):
+    '''本地模型翻译'''
+    # 模型下载到本地可实现离线操作
+    
+    tokenizer,model = load_model()
+    ret = translate(content,tokenizer,model)
+    return ret
 
 def translate_func(content):
     '''集成百度、谷歌、有道多合一的翻译'''
 
-    funcs = [google_translate, youdao_translate]    # baidu_translate,google_translate,youdao_translate
+    funcs = [translate_local,google_translate, youdao_translate]    # baidu_translate,google_translate,youdao_translate
     count = 0
+
 
     # 循环调用百度、谷歌、有道API，其中如果谁调成功就返回，或者大于等于9次没有成功也返回。
     while True:
@@ -212,3 +220,6 @@ def translate_func(content):
                     return ''
                 else:
                     continue
+
+
+

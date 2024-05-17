@@ -90,7 +90,8 @@ class PdfTranslate(Translate):
                         content = out.get_text().strip()
                         if content:
                             to_trans_content = content.replace("\r\n","")
-                            ret = translate_func(to_trans_content)
+                            # ret = translate_func(to_trans_content)
+                            ret = translate_local(to_trans_content)
                             trans = ret if ret else '翻译失败'
 
                             self.write(content)

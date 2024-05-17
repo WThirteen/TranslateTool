@@ -56,7 +56,8 @@ class PdfTranslagePyPDF2(Translate):
             for line in content_list:
                 line = line.strip()
                 if line:
-                    ret = translate_func(line)
+                    # ret = translate_func(line)
+                    ret = translate_local(line)
                     trans = ret if ret else '翻译失败'
                     self.write(line + '\n')
                     self.write(trans)

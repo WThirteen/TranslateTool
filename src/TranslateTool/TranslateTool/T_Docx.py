@@ -54,7 +54,8 @@ class DocxTranslate(Translate):
             content = para.text.strip()    # 去掉多余空格
 
             if content != '':
-                ret = translate_func(content)
+                # ret = translate_func(content)
+                ret = translate_local(content)
                 trans = ret if ret else '翻译失败'
                 # 写入新文件
                 new_doc.add_paragraph(content)
